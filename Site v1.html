@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My title here!</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript">
+// <![CDATA[
+var speed=100; // speed colours change, 1 second = 1000
+var delay=25; // how long to wait for each wipe
+var alink=""; // page to link text to (set to ="" for no link)
+
+/****************************
+*   Wipe Out Text Effect    *
+*(c)2003-15 mf2fm web-design*
+*  http://www.mf2fm.com/rv  *
+* DON'T EDIT BELOW THIS BOX *
+****************************/
+function addLoadEvent(funky) {
+  var oldonload=window.onload;
+  if (typeof(oldonload)!='function') window.onload=funky;
+  else window.onload=function() {
+    if (oldonload) oldonload();
+    funky();
+  }
+}
+
+addLoadEvent(swab);
+
+var w_txt;
+function swab() { if (document.getElementById) {
+  var wiper=document.getElementById("wipe");
+  w_txt=wiper.firstChild.nodeValue;
+  while (wiper.childNodes.length) wiper.removeChild(wiper.childNodes[0]);
+  for (var i=0; i<w_txt.length; i++) {
+    var wipei=document.createElement("span");
+    wipei.setAttribute("id", "wipe"+i);
+    wipei.appendChild(document.createTextNode(w_txt.charAt(i)));
+    if (alink) {
+      wipei.style.cursor="pointer";
+      wipei.onclick=function() { top.location.href=alink; }
+    }
+    wiper.appendChild(wipei);
+  }
+  wipe(0);
+}}
+
+function wipe(c) {
+  if (!c) for (var w=0; w<w_txt.length; w++) document.getElementById("wipe"+w).style.visibility="hidden";
+  else if (c<=w_txt.length) document.getElementById("wipe"+(c-1)).style.visibility="visible";
+  setTimeout("wipe("+(++c%(w_txt.length+delay))+")", speed);
+}
+// ]]>
+</script>
+  </head>
+  
+  
+  
+  
+  
+  <body>
+	
+    <span id="wipe">Hello World! ! !</span>
+  </body>
+  
+  
+  
+  <iframe width="314" height="321" scrolling="no" src="https://gifypet.neocities.org/pet/pet.html?name=Buddha&dob=1700631976&gender=f&element=Earth&pet=cat.gif&map=night.gif&background=wood.jpg&tablecolor=black&textcolor=black" frameborder="0">
+  </iframe>
+</html>
